@@ -8,11 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
   --orange:#e85c2d;
@@ -22,12 +18,6 @@
   --text:#f4f4f5;
   --muted:#9ca3af;
   --border:rgba(255,255,255,.12);
-
-  --jay:#e85c2d;
-  --al:#3b9eff;
-  --hamun:#3ecf8e;
-  --sourabh:#c084fc;
-  --art:#fbbf24;
 }
 
 body{
@@ -37,10 +27,7 @@ body{
   padding:24px;
 }
 
-.wrapper{
-  max-width:1150px;
-  margin:auto;
-}
+.wrapper{max-width:1150px;margin:auto}
 
 .header{
   display:flex;
@@ -67,9 +54,7 @@ h1{
   text-transform:uppercase;
 }
 
-h1 span{
-  color:var(--orange);
-}
+h1 span{color:var(--orange)}
 
 .meta{
   text-align:right;
@@ -241,9 +226,7 @@ h1 span{
   cursor:pointer;
 }
 
-.reset-btn:hover{
-  background:#e85c2d;
-}
+.reset-btn:hover{background:#e85c2d}
 
 select,button{
   width:100%;
@@ -270,9 +253,7 @@ select{
   cursor:pointer;
 }
 
-.main-btn:hover{
-  filter:brightness(1.08);
-}
+.main-btn:hover{filter:brightness(1.08)}
 
 .alert{
   display:none;
@@ -315,32 +296,12 @@ select{
 }
 
 @media(max-width:760px){
-
-  body{
-    padding:14px;
-  }
-
-  .layout{
-    grid-template-columns:1fr;
-  }
-
-  .header{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .meta{
-    text-align:left;
-  }
-
-  h1{
-    font-size:34px;
-  }
-
-  .lane{
-    grid-template-columns:1fr;
-  }
-
+  body{padding:14px}
+  .layout{grid-template-columns:1fr}
+  .header{flex-direction:column;align-items:flex-start}
+  .meta{text-align:left}
+  h1{font-size:34px}
+  .lane{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -349,67 +310,53 @@ select{
 
 <div class="wrapper">
 
-<div class="header">
+  <div class="header">
+    <div>
+      <div class="eyebrow">🏁 Live Registration Race</div>
+      <h1>IMPEX + NUTANIX<br><span>Infrastructure Strategy</span></h1>
+    </div>
 
-<div>
-<div class="eyebrow">🏁 Live Registration Race</div>
+    <div class="meta">
+      🏛 Petersen Automotive Museum<br>
+      📅 May 28th, 2026
+    </div>
+  </div>
 
-<h1>
-IMPEX + NUTANIX<br>
-<span>Infrastructure Strategy</span>
-</h1>
-</div>
+  <div class="layout">
 
-<div class="meta">
-🏛 Petersen Automotive Museum<br>
-📅 May 28th, 2026
-</div>
+    <div>
+      <div class="card">
+        <div class="card-title">🏎 Live Race Track</div>
+        <div class="race-board" id="raceBoard"></div>
+      </div>
+    </div>
 
-</div>
+    <div>
 
-<div class="layout">
+      <div class="card">
+        <div class="card-title">➕ Add Registration</div>
+        <div id="alert" class="alert"></div>
 
-<div>
+        <select id="ownerSelect">
+          <option value="jay">Jay</option>
+          <option value="al">Al</option>
+          <option value="hamun">Hamun</option>
+          <option value="sourabh">Sourabh</option>
+          <option value="art">Art</option>
+          <option value="rajiv">Rajiv</option>
+        </select>
 
-<div class="card">
-<div class="card-title">🏎 Live Race Track</div>
+        <button class="main-btn" onclick="addReg()">🏁 Move Car +1</button>
+      </div>
 
-<div class="race-board" id="raceBoard"></div>
+      <div class="card">
+        <div class="card-title">🏆 Live Podium</div>
+        <div id="leaderboard"></div>
+      </div>
 
-</div>
+    </div>
 
-</div>
-
-<div>
-
-<div class="card">
-
-<div class="card-title">➕ Add Registration</div>
-
-<div id="alert" class="alert"></div>
-
-<select id="ownerSelect">
-<option value="jay">Jay</option>
-<option value="al">Al</option>
-<option value="hamun">Hamun</option>
-<option value="sourabh">Sourabh</option>
-<option value="art">Art</option>
-</select>
-
-<button class="main-btn" onclick="addReg()">
-🏁 Move Car +1
-</button>
-
-</div>
-
-<div class="card">
-<div class="card-title">🏆 Live Podium</div>
-<div id="leaderboard"></div>
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
@@ -439,7 +386,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
 const scoreRef = ref(db,"scores");
 
 var COLORS={
@@ -447,7 +393,8 @@ var COLORS={
   al:"#3b9eff",
   hamun:"#3ecf8e",
   sourabh:"#c084fc",
-  art:"#fbbf24"
+  art:"#fbbf24",
+  rajiv:"#ef4444"
 };
 
 var NAMES={
@@ -455,17 +402,19 @@ var NAMES={
   al:"Al",
   hamun:"Hamun",
   sourabh:"Sourabh",
-  art:"Art"
+  art:"Art",
+  rajiv:"Rajiv"
 };
 
-var ORDER=["jay","al","hamun","sourabh","art"];
+var ORDER=["jay","al","hamun","sourabh","art","rajiv"];
 
 var scores={
   jay:0,
   al:0,
   hamun:0,
   sourabh:0,
-  art:0
+  art:0,
+  rajiv:0
 };
 
 function cleanScores(data){
@@ -474,127 +423,98 @@ function cleanScores(data){
     al:data?.al || 0,
     hamun:data?.hamun || 0,
     sourabh:data?.sourabh || 0,
-    art:data?.art || 0
+    art:data?.art || 0,
+    rajiv:data?.rajiv || 0
   };
 }
 
 async function initData(){
-
   const snap = await get(scoreRef);
 
   if(!snap.exists()){
     await set(scoreRef,scores);
+  } else {
+    const current = cleanScores(snap.val());
+    await update(scoreRef,current);
   }
-
 }
 
 function renderTracks(){
-
   var board=document.getElementById("raceBoard");
-
   board.innerHTML="";
 
   ORDER.forEach(function(id){
-
     var lane=document.createElement("div");
-
     lane.className="lane";
 
     var move=Math.min(scores[id]*8,78);
 
     lane.innerHTML=
-
       '<div class="driver-label">'+
-      '<span class="dot" style="background:'+COLORS[id]+'"></span>'+
-      '<span>'+NAMES[id]+'</span>'+
+        '<span class="dot" style="background:'+COLORS[id]+'"></span>'+
+        '<span>'+NAMES[id]+'</span>'+
       '</div>'+
 
       '<div class="track-area">'+
+        '<div class="finish"></div>'+
 
-      '<div class="finish"></div>'+
-
-      '<div class="car" style="left:calc(18px + '+move+'%); color:'+COLORS[id]+'">'+
-
-      '<div class="car-body"></div>'+
-      '<div class="car-top"></div>'+
-      '<div class="car-nose"></div>'+
-      '<div class="wheel w1"></div>'+
-      '<div class="wheel w2"></div>'+
-
-      '</div>'+
-
+        '<div class="car" style="left:calc(18px + '+move+'%); color:'+COLORS[id]+'">'+
+          '<div class="car-body"></div>'+
+          '<div class="car-top"></div>'+
+          '<div class="car-nose"></div>'+
+          '<div class="wheel w1"></div>'+
+          '<div class="wheel w2"></div>'+
+        '</div>'+
       '</div>'+
 
       '<div class="lane-actions">'+
-
-      '<div class="lap-badge">'+scores[id]+' registrations</div>'+
-
-      '<button class="reset-btn" onclick="resetDriver(\''+id+'\')">'+
-      'Reset '+NAMES[id]+
-      '</button>'+
-
+        '<div class="lap-badge">'+scores[id]+' registrations</div>'+
+        '<button class="reset-btn" onclick="resetDriver(\''+id+'\')">Reset '+NAMES[id]+'</button>'+
       '</div>';
 
     board.appendChild(lane);
-
   });
-
 }
 
 function renderLeaderboard(){
-
   var el=document.getElementById("leaderboard");
-
   var sorted=ORDER.slice().sort(function(a,b){
     return scores[b]-scores[a];
   });
 
-  var pos=["1st","2nd","3rd","4th","5th"];
+  var pos=["1st","2nd","3rd","4th","5th","6th"];
 
   el.innerHTML="";
 
   sorted.forEach(function(id,i){
-
     var row=document.createElement("div");
-
     row.className="lb-row";
 
     row.innerHTML=
-
       '<div class="lb-left">'+
-      '<span class="lb-pos">'+pos[i]+'</span>'+
-      '<span class="dot" style="background:'+COLORS[id]+'"></span>'+
-      '<strong>'+NAMES[id]+'</strong>'+
+        '<span class="lb-pos">'+pos[i]+'</span>'+
+        '<span class="dot" style="background:'+COLORS[id]+'"></span>'+
+        '<strong>'+NAMES[id]+'</strong>'+
       '</div>'+
 
-      '<div class="lb-count" style="color:'+COLORS[id]+'">'+
-      scores[id]+
-      '</div>';
+      '<div class="lb-count" style="color:'+COLORS[id]+'">'+scores[id]+'</div>';
 
     el.appendChild(row);
-
   });
-
 }
 
 function showAlert(message){
-
   var alert=document.getElementById("alert");
-
   alert.innerHTML="🏁 "+message;
-
   alert.style.display="block";
 
   setTimeout(function(){
     alert.style.display="none";
   },3000);
-
 }
 
 window.addReg = async function(){
-
   var owner=document.getElementById("ownerSelect").value;
-
   var newScore=(scores[owner] || 0)+1;
 
   await update(scoreRef,{
@@ -602,17 +522,14 @@ window.addReg = async function(){
   });
 
   showAlert(NAMES[owner]+" moved forward!");
-
 };
 
 window.resetDriver = async function(id){
-
   await update(scoreRef,{
     [id]:0
   });
 
   showAlert(NAMES[id]+" reset.");
-
 };
 
 renderTracks();
@@ -621,12 +538,9 @@ renderLeaderboard();
 initData();
 
 onValue(scoreRef,function(snapshot){
-
   scores=cleanScores(snapshot.val());
-
   renderTracks();
   renderLeaderboard();
-
 });
 
 </script>
